@@ -32,37 +32,32 @@ typedef struct _block {
 
 Block block, block2;
 
-/* 'DO NOT MODIFY THESE FUNCTIONS.'		'이 함수들을 고치지 마세요.'		 */
+
 void removeCursorFromCMD();
 void setCoordinate(int x, int y); //cmd에서 커서를 x, y 위치로 세팅
 
 								  /* display fuctions */
-void goMainMenuScreen(); // 메인메뉴로 이동 Moving to main menu.
-void printGameScreen();  // 게임화면 출력	 Printing game screen.
-void printPauseScreen(); // 일시 정지 화면	 Prining pause screen.
-void printEndScreen(int endType); //  // 스테이지 종료 화면 출력. 스테이지클리어, 모든스테이지클리어, 패배.
+void goMainMenuScreen(); //  Moving to main menu.
+void printGameScreen();  // 	 Printing game screen.
+void printPauseScreen(); // 	 Prining pause screen.
+void printEndScreen(int endType); //  // 
 									//Printing result of end of stages including 'cleared the stage', 'cleared whole stages', and 'lost'.
 void clearScreen();
-/* 'DO NOT MODIFY THESE FUNCTIONS.' ends	'이 함수들을 고치지 마세요' 끝.	*/
-
-		/* @ --- You can modify following functions ----  이 아래에있는 함수들을 고치세요.  */
-//Implement these functions below to complete your project.
-//이 함수들을 구현하셔서 프로젝트를 완성하세요.
-
+	
 		/* Block generating functions */
 int getRandomNumber();
 void newBlock();
 
 /* block control and merging functions  */
-int takeBlockControl();				//블록 조작 방향 입력 받음			Taking input for moving blocks
+int takeBlockControl();				//			Taking input for moving blocks
 void flipBlock();					// Fliping function.
-void moveBlock(int direction);		// 입력 받은 방향으로 블록 이동		Moving blocks to corresponding direction of input key.
+void moveBlock(int direction);		// 		Moving blocks to corresponding direction of input key.
 int checkAdjacentBlock(int, int);	//Checking adjacent blocks for merging conditions
-void checkNumber(int, int);			// 블록 인접 블록숫자 확인			Checking number of adjacent block
+void checkNumber(int, int);			// 			Checking number of adjacent block
 
 		/* game flow control functions */
-int isStageEnd();  // 스테이지가 끝났는지 체크. (스테이지 클리어, 모든 스테이지 클리어, 패배)         Checking condition for end of the stage. (stage clear, all stage clear, lost)
-void setGameFlow(int type); // 각 스테이지에 맞는 게임 환경 세팅.   Setting up status values for each stages.
+int isStageEnd();  //        Checking condition for end of the stage. (stage clear, all stage clear, lost)
+void setGameFlow(int type); //    Setting up status values for each stages.
 int BlockIsNumber(int x, int y);
 
 
@@ -90,7 +85,7 @@ void main() {
 			Sleep(time_interval_moveBlockDown);
 		}
 		moveBlock(DOWN);
-		if (!block.isactive && !block2.isactive) { // 이 부분은 떨어지는 블록이 바닥이나 다른블록에 닿았는지 체크합니다. This statement is cheking that wether the falling blocks got touched by floor or other blocks.
+		if (!block.isactive && !block2.isactive) { //  This statement is cheking that wether the falling blocks got touched by floor or other blocks.
 			checkNumber(block.pos_x, block.pos_y);
 			checkNumber(block.pos_x, block.pos_y);
 			if (isStageEnd() != 1) {
@@ -102,8 +97,7 @@ void main() {
 
 int getRandomNumber() {
 	/*
-
-	일정 확률로 2, 4, 8 중 하나를 생성하여 그 값을 리턴함.
+	
 	Generate 2, 4, or 8 with certain percentage and return the number.
 
 	*/
@@ -117,7 +111,6 @@ int getRandomNumber() {
 char getRandomOper() {
 	/*
 
-	일정 확률로 +, - 중 하나를 생성하여 그 값을 리턴함.
 	Generate +, or - with certain percentage and return the number.
 
 	*/
@@ -136,8 +129,6 @@ char getRandomOper() {
 void newBlock() {
 	/*
 
-	이 함수는 생성된 값과 떨어지기 시작하는 위치를 입력해서 새 블록을 만듭니다.
-	그리고 나서, 다음 블록에 사용될 새 값을 생성합니다.
 	This fuction makes new blocks with setting generated value and the initial position where starts falling down.
 	After that, generate new number for value of the next block.
 
@@ -173,8 +164,8 @@ int takeBlockControl() {
 
 	if (_kbhit()) {
 		input_blockControl = _getch();
-		if (input_blockControl == 224 && block.isactive && block2.isactive) { //방향키인경우  Cases for direction keys
-			do { input_blockControl = _getch(); } while (input_blockControl == 224);//방향키지시값을 버림  dropping the value of direction
+		if (input_blockControl == 224 && block.isactive && block2.isactive) { //  Cases for direction keys
+			do { input_blockControl = _getch(); } while (input_blockControl == 224);// dropping the value of direction
 			switch (input_blockControl) {
 			case UP:
 				flipBlock();
@@ -190,12 +181,11 @@ int takeBlockControl() {
 				break;
 			}
 		}
-		else { //방향키가 아닌경우  Cases for other keys
+		else { //  Cases for other keys
 			switch (input_blockControl) {
 				/*
 
-				Implement hard drop
-				하드드랍을 구현하세요
+				Implement hard drop		
 
 				*/
 			case SPACE:
@@ -216,15 +206,14 @@ int takeBlockControl() {
 			}
 		}
 	}
-	while (_kbhit()) _getch(); //키버퍼를 비움. Emptying key buffer.
+	while (_kbhit()) _getch(); // Emptying key buffer.
 	return 0;
 }
 
-void flipBlock(void) {//좌우 반전함수		Block flipping function
+void flipBlock(void) {// Block flipping function
 		/*
 
 		Fliping blocks when the 'up' butten is pressed.
-		위로 버튼이 눌렸을경우 블록을 바꿉니다.
 
 		*/
 	int temp;
@@ -238,7 +227,7 @@ void flipBlock(void) {//좌우 반전함수		Block flipping function
 	}
 }
 
-void moveBlock(int direction) { // 좌,우,아래 입력시 움직임 함수	Moving blocks for left, reight, and down input
+void moveBlock(int direction) { //	Moving blocks for left, reight, and down input
 	switch (direction) {
 	case LEFT:
 		if (block.pos_y < block2.pos_y) {
@@ -329,11 +318,8 @@ int BlockIsNumber(int x, int y) {
 }
 
 
-int checkAdjacentBlock(int x, int y) { //Merging 조건 확인 함수		Checking merging condition
+int checkAdjacentBlock(int x, int y) { //	Checking merging condition
 	 /*
-
-	 조건확인하여 연산하고 Merging
-	  64 생성시 점수 계산
 
 	 Implement checking condition of Merging.
 	 If 64 is found, player earns points.
@@ -445,7 +431,7 @@ void checkNumber(int x, int y) {
 
 
 
-void setGameFlow(int setGameFlowType) { // Implement this function to set conditions of stages.  스테이지의 조건들을 설정하기위해 이 함수를 완성하세요.
+void setGameFlow(int setGameFlowType) { // Implement this function to set conditions of stages. 
 	switch (setGameFlowType) {
 	case 0:  /* initialize game */
 		if (best_score < score)
@@ -515,7 +501,7 @@ void setGameFlow(int setGameFlowType) { // Implement this function to set condit
 	}
 }
 
-int isStageEnd() { // 스테이지가 끝났는지 체크      Checking if stage ended up or not.
+int isStageEnd() { //      Checking if stage ended up or not.
 	for (int i = X - 1; i > 1; i--) {
 		for (int j = 0; j < Y; j++) {
 			if (score >= goal) {
@@ -535,14 +521,14 @@ int isStageEnd() { // 스테이지가 끝났는지 체크      Checking if stage
 
 
 /* @ ↓↓↓'DO NOT MODIFY FROM HERE.'↓↓↓ starts		 이 아래로는 수정하지 마세요.	*/
-void removeCursorFromCMD() { // cmd에서 깜빡이는 커서없앰 Concealing cursor from cmd.
+void removeCursorFromCMD() { //  Concealing cursor from cmd.
 	CONSOLE_CURSOR_INFO CurInfo;
 	CurInfo.dwSize = 1;
 	CurInfo.bVisible = FALSE;
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &CurInfo);
 }
 
-void setCoordinate(int x, int y) { //cmd에서 커서 위치를 x, y로 세팅   Setting curser to (x,y).
+void setCoordinate(int x, int y) { // Setting curser to (x,y).
 	COORD pos = { 2 * x,y };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
@@ -647,7 +633,7 @@ void printGameScreen() {
 
 }
 
-void goMainMenuScreen() { //시작화면 출력 함수. Printing out main menu.
+void goMainMenuScreen() { // Printing out main menu.
 	int x = 19;
 	int y = 9;
 	int input_command = 0;
@@ -724,7 +710,7 @@ void goMainMenuScreen() { //시작화면 출력 함수. Printing out main menu.
 
 }
 
-void printPauseScreen() { // 게임 일시정지		Pause game.
+void printPauseScreen() { // 	Pause game.
 	int x = MAP_ADJ_X + 8;
 	int y = MAP_ADJ_Y + 5;
 
@@ -837,4 +823,4 @@ void clearScreen() {
 
 	system("cls");
 }
-/* @ '↑↑↑DO NOT MODIFY.↑↑↑'ends. */
+/* end */
