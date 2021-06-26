@@ -5,7 +5,6 @@
 #include<windows.h>
 #include<math.h>
 
-// COSE101, Spring Semester, 2019
 // Computer Science and Engineering, College of Informatics, Korea University, Seoul.
 
 #define LEFT 75
