@@ -519,7 +519,6 @@ int isStageEnd() { //      Checking if stage ended up or not.
 }
 
 
-/* @ ↓↓↓'DO NOT MODIFY FROM HERE.'↓↓↓ starts		 이 아래로는 수정하지 마세요.	*/
 void removeCursorFromCMD() { //  Concealing cursor from cmd.
 	CONSOLE_CURSOR_INFO CurInfo;
 	CurInfo.dwSize = 1;
