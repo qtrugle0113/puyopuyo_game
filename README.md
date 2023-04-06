@@ -1,5 +1,5 @@
 # puyopuyo_game
-The game I've made 2 years ago
+The game I made 4 years ago
 
 Game screenshot:
 
